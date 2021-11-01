@@ -106,18 +106,12 @@ namespace Algorum.Quant.Types
             JsonData = JsonConvert.SerializeObject( obj, new StringEnumConverter() )
          }, new StringEnumConverter() );
 
-         // DIAG::
-         //Console.WriteLine( $"RESULT >>> {msg}" );
-
          await _webSocket.SendAsync( new ArraySegment<byte>( Encoding.UTF8.GetBytes( msg ) ), WebSocketMessageType.Text, true, CancellationToken.None );
       }
 
       public async Task SendAsync( AlgorumWebSocketMessage agMessage )
       {
          var msg = JsonConvert.SerializeObject( agMessage, new StringEnumConverter() );
-
-         // DIAG::
-         //Console.WriteLine( $"RESULT >>> {msg}" );
 
          await _webSocket.SendAsync( new ArraySegment<byte>( Encoding.UTF8.GetBytes( msg ) ), WebSocketMessageType.Text, true, CancellationToken.None );
       }
@@ -198,9 +192,6 @@ namespace Algorum.Quant.Types
 
             await SendAsync( agMessage );
 
-            // DIAG::
-            //Console.WriteLine( $"Exec AG MSG:: CorId {corid}" );
-
             syncObj.WaitOne();
 
             var agResult = _msgMap[corid];
@@ -222,9 +213,6 @@ namespace Algorum.Quant.Types
          }
          finally
          {
-            // DIAG::
-            //Console.WriteLine( $"Removed Message in Exec AG Finally::: {corid}" );
-
             if ( _callMap.TryRemove( corid, out syncObj ) )
                syncObj.Dispose();
 
@@ -253,9 +241,6 @@ namespace Algorum.Quant.Types
 
             await SendAsync( agMessage );
 
-            // DIAG::
-            //Console.WriteLine( $"Exec AG MSG:: CorId {corid}" );
-
             syncObj.WaitOne();
 
             var agResult = _msgMap[corid];
@@ -268,9 +253,6 @@ namespace Algorum.Quant.Types
          }
          finally
          {
-            // DIAG::
-            //Console.WriteLine( $"Removed Message in Exec AG Finally::: {corid}" );
-
             if ( _callMap.TryRemove( corid, out syncObj ) )
                syncObj.Dispose();
 
@@ -298,9 +280,6 @@ namespace Algorum.Quant.Types
 
             await SendAsync( agMessage );
 
-            // DIAG::
-            //Console.WriteLine( $"Exec AG MSG:: CorId {corid}" );
-
             syncObj.WaitOne();
 
             var agResult = _msgMap[corid];
@@ -322,9 +301,6 @@ namespace Algorum.Quant.Types
          }
          finally
          {
-            // DIAG::
-            //Console.WriteLine( $"Removed Message in Exec AG Finally::: {corid}" );
-
             if ( _callMap.TryRemove( corid, out syncObj ) )
                syncObj.Dispose();
 
@@ -344,43 +320,29 @@ namespace Algorum.Quant.Types
          {
             var messageString = Encoding.UTF8.GetString( messageBytes.ToArray() );
 
-            // DIAG::
-            //if ( messageString.Contains( "set_data" ) )
-            //Console.WriteLine( $">>> AG MSG >>> {messageString}" );
-
             var agMessage = JsonConvert.DeserializeObject<AlgorumWebSocketMessage>( messageString );
 
             if ( agMessage == null )
-            {
-               // DIAG::
-               //Console.WriteLine( "agMessage is NULL >>>>>" );
                return;
-            }
-
-            //Console.WriteLine( $"Process AG MSG:: CorID {agMessage.CorId}" );
 
             if ( !string.IsNullOrWhiteSpace( agMessage.CorId ) &&
                ( ( agMessage.MessageType == AlgorumMessageType.Response ) || ( agMessage.MessageType == AlgorumMessageType.ErrorResponse ) ) )
             {
-               //Console.WriteLine( $"Releasing AG MSG:: CorID {agMessage.CorId}" );
-
                _msgMap.TryAdd( agMessage.CorId, agMessage );
 
                if ( _callMap.ContainsKey( agMessage.CorId ) )
                   _callMap[agMessage.CorId].Set();
                else
                   Console.WriteLine( $"ERROR: NO CallMap entry found. {agMessage.CorId}, {agMessage.Name}, {agMessage.JsonData}" );
-
-               //Console.WriteLine( $"Released AG MSG:: CorID {agMessage.CorId}" );
             }
             else
             {
                await ProcessMessageAsync( agMessage );
             }
          }
-         catch ( Exception )
+         catch ( Exception ex )
          {
-            //Console.WriteLine( ex.ToString() );
+            Console.WriteLine( ex.ToString() );
          }
       }
 

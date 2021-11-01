@@ -239,7 +239,6 @@ namespace Algorum.Quant.Types
                var stats = GetStats( tickData );
                await SendAsync( "publish_stats", stats );
 
-               // DIAG::
                Console.WriteLine( $"Progress: {_progressPercent:N2}" );
 
                foreach ( var kvp in stats )

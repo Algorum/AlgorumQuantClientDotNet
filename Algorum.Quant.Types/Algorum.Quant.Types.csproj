@@ -11,10 +11,12 @@
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageTags>Algo Trading</PackageTags>
-    <PackageReleaseNotes>Renamed Product property in the Order class to ProductType and changed the type of the property to OrderProductType.</PackageReleaseNotes>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
-    <FileVersion>1.0.3.0</FileVersion>
-    <Version>1.0.3</Version>
+    <PackageReleaseNotes>Added the last tick available to the quant engine for a particular order, as a property "LastTick" to the Order class.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.5.0</AssemblyVersion>
+    <FileVersion>1.0.5.0</FileVersion>
+    <Version>1.0.5</Version>
+    <PackageIcon>AlgorumIcon.png</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +27,10 @@
 
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="AlgorumIcon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <None Include="LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>

@@ -37,5 +37,6 @@ namespace Algorum.Quant.Types
       public bool Short { get; set; }
       public SlippageType SlippageType { get; set; }
       public double Slippage { get; set; }
+      public TickData LastTick { get; set; }
    }
 }

@@ -151,10 +151,7 @@ namespace Algorum.Quant.Types
       {
          try
          {
-            string val = string.Empty;
-
-            lock ( value )
-               val = JsonConvert.SerializeObject( value );
+            string val = JsonConvert.SerializeObject( value );
 
             await ExecuteAsync( "set_data", new QuantData() { Key = key, Value = val } );
          }

@@ -15,7 +15,7 @@ namespace Algorum.Quant.Types
       public string StatusMessage { get; set; }
       public OrderStatus Status { get; set; }
       public double Quantity { get; set; }
-      public string Product { get; set; }
+      public OrderProductType ProductType { get; set; }
       public double Price { get; set; }
       public string PlacedBy { get; set; }
       public double PendingQuantity { get; set; }

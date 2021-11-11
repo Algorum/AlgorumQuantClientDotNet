@@ -147,6 +147,11 @@ namespace Algorum.Quant.Types
          return await ExecuteAsync<PlaceOrderRequest, string>( "place_order", placeOrderRequest );
       }
 
+      public async Task<bool> CancelOrderAsync( string orderId )
+      {
+         return await ExecuteAsync<string, bool>( "cancel_order", orderId );
+      }
+
       public async Task SetDataAsync<T>( string key, T value )
       {
          try

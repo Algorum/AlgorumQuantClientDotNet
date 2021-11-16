@@ -8,6 +8,10 @@ namespace Algorum.Quant.Types
 {
    public class Order
    {
+      public string UserId { get; set; }
+      public string StrategyId { get; set; }
+      public bool Backtesting { get; set; }
+      public string BacktestId { get; set; }
       public double TriggerPrice { get; set; }
       public OrderDirection OrderDirection { get; set; }
       public Symbol Symbol { get; set; }

@@ -21,6 +21,11 @@ namespace Algorum.Quant.Types
 
       public string Uid => _uid;
 
+      public async Task ClearCandlesAsync()
+      {
+         await _wsClient.ExecuteAsync<string>( "clear_indicator_candles", Uid );
+      }
+
       public async Task<double> ABANDONEDBABYBEARAsync( double period )
       {
          var result = await _wsClient.ExecuteAsync<GetIndicatorsRequest, List<IndicatorResult>>(

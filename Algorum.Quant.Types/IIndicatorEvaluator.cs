@@ -12,6 +12,7 @@ namespace Algorum.Quant.Types
          get;
       }
 
+      Task ClearCandlesAsync();
       Task<double> TSFAsync( double period );
       Task<double> SMAAsync( double period );
       Task<double> EMAAsync( double period );

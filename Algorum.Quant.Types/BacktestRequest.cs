@@ -11,6 +11,12 @@ namespace Algorum.Quant.Types
          set;
       }
 
+      public double Capital
+      {
+         get;
+         set;
+      }
+
       public DateTime StartDate
       {
          get;

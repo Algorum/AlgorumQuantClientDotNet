@@ -44,13 +44,13 @@ namespace Algorum.Quant.Types
          set;
       }
 
-      public string BacktestStartDate
+      public DateTime BacktestStartDate
       {
          get;
          set;
       }
 
-      public string BacktestEndDate
+      public DateTime BacktestEndDate
       {
          get;
          set;

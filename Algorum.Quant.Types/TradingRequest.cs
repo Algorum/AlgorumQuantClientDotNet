@@ -8,6 +8,12 @@ namespace Algorum.Quant.Types
 {
    public class TradingRequest
    {
+      public double Capital
+      {
+         get;
+         set;
+      }
+
       public string ApiKey
       {
          get;

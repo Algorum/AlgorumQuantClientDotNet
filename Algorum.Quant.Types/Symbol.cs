@@ -57,6 +57,10 @@ namespace Algorum.Quant.Types
                var nextMonth = timestamp.AddMonths( 1 );
                expiryDate = nextMonth.GetLastSpecificDayOfTheMonth( DayOfWeek.Thursday );
             }
+            else
+            {
+               expiryDate = curMonthLastDate;
+            }
 
             expiryPart = expiryDate.ToString( "ddMMyyyy" );
          }
@@ -71,6 +75,10 @@ namespace Algorum.Quant.Types
                {
                   var nextMonth = timestamp.AddMonths( 1 );
                   expiryDate = nextMonth.GetLastSpecificDayOfTheMonth( DayOfWeek.Thursday );
+               }
+               else
+               {
+                  expiryDate = curMonthLastDate;
                }
 
                expiryPart = expiryDate.ToString( "ddMMyyyy" );

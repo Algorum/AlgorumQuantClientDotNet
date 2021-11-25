@@ -9,7 +9,7 @@ namespace Algorum.Quant.Types
       public CrossBelow()
          : base()
       {
-         // No-Op
+         StopCrossOverUpdate = true;
       }
 
       public override bool Evaluate( double leftVal, double rightVal )

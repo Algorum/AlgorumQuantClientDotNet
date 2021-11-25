@@ -9,7 +9,6 @@ namespace Algorum.Quant.Types
       public CrossAbove()
          : base()
       {
-         // No-Op
          StopCrossOverUpdate = true;
       }
 

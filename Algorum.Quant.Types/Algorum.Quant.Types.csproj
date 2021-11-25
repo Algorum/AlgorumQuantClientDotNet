@@ -11,10 +11,10 @@
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageTags>Algo Trading</PackageTags>
-    <PackageReleaseNotes>Associated order object with strategy run object.</PackageReleaseNotes>
-    <AssemblyVersion>1.0.12.0</AssemblyVersion>
-    <FileVersion>1.0.12.0</FileVersion>
-    <Version>1.0.12</Version>
+    <PackageReleaseNotes>Minor updates to CrossBelow type.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.13.0</AssemblyVersion>
+    <FileVersion>1.0.13.0</FileVersion>
+    <Version>1.0.13</Version>
     <PackageIcon>AlgorumIcon.png</PackageIcon>
     <PackageIconUrl />
   </PropertyGroup>

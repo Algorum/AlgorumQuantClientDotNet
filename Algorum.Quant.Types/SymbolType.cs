@@ -12,6 +12,7 @@ namespace Algorum.Quant.Types
       FuturesStock,
       OptionsStock,
       FuturesIndex,
-      OptionsIndex
+      OptionsIndex,
+      Index
    }
 }

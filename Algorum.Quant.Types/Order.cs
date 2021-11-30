@@ -41,5 +41,6 @@ namespace Algorum.Quant.Types
       public SlippageType SlippageType { get; set; }
       public double Slippage { get; set; }
       public TickData LastTick { get; set; }
+      public DateTime ValidTillTime { get; set; }
    }
 }

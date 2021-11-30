@@ -52,6 +52,7 @@ namespace Algorum.Quant.Types
          AddMessageHandler( "tick", TickHandlerAsync );
          AddMessageHandler( "order_update", OrderUpdateHandlerAsync );
          AddMessageHandler( "stop", StopHandlerAsync );
+         AddMessageHandler( "error", ErrorHandlerAsync );
 
          Initialize( url );
 
@@ -81,6 +82,11 @@ namespace Algorum.Quant.Types
       {
          await OnStopAsync();
          await SendResponseAsync( message );
+      }
+
+      private async Task ErrorHandlerAsync( AlgorumWebSocketMessage message )
+      {
+         await OnErrorAsync( JsonConvert.DeserializeObject<string>( message.JsonData ) );
       }
 
       private async Task OrderUpdateHandlerAsync( AlgorumWebSocketMessage message )
@@ -264,6 +270,11 @@ namespace Algorum.Quant.Types
 
       public abstract Task OnOrderUpdateAsync( Order order );
       public abstract Task OnTickAsync( TickData tickData );
+
+      public virtual async Task OnErrorAsync( string errorMsg )
+      {
+         Console.WriteLine( errorMsg );
+      }
 
       public async Task OnTickHandlerAsync( TickData tickData )
       {

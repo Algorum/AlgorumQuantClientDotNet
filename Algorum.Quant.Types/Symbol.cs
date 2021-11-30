@@ -115,7 +115,7 @@ namespace Algorum.Quant.Types
       }
    }
 
-   public class Symbol : IComparable<Symbol>
+   public class Symbol : IComparable<Symbol>, IEquatable<Symbol>
    {
       /// <summary>
       /// Symbol type (stocks, futures, options, crypto, etc.,)
@@ -173,10 +173,85 @@ namespace Algorum.Quant.Types
 
       public int CompareTo( Symbol other )
       {
-         if ( other.SymbolType == SymbolType && string.Compare( other.Ticker, Ticker, true ) == 0 )
+         if ( string.Compare( Ticker, other.Ticker, true ) == 0 &&
+                  SymbolType == other.SymbolType &&
+                  FNOMonth == other.FNOMonth &&
+                  FNOWeek == other.FNOWeek &&
+                  FNOPeriodType == other.FNOPeriodType )
             return 0;
 
          return -1;
+      }
+
+      public override int GetHashCode()
+      {
+         string typePart = string.Empty;
+
+         switch ( SymbolType )
+         {
+         case SymbolType.FuturesIndex:
+            typePart = "FUTIDX";
+            break;
+         case SymbolType.FuturesStock:
+            typePart = "FUTSTK";
+            break;
+         case SymbolType.OptionsIndex:
+            typePart = "OPTIDX";
+            break;
+         case SymbolType.OptionsStock:
+            typePart = "OPTSTK";
+            break;
+         }
+
+         string namePart = Ticker;
+         string expiryPart = string.Empty;
+         string optionTypePart;
+
+         if ( SymbolType == SymbolType.FuturesIndex || SymbolType == SymbolType.FuturesStock )
+            optionTypePart = OptionType.XX.ToString();
+         else
+            optionTypePart = OptionType == OptionType.None ? string.Empty : OptionType.ToString();
+
+         string optionValue = OptionValue == 0 ? string.Empty : OptionValue.ToString( "N:0" );
+
+         if ( SymbolType == SymbolType.FuturesIndex || SymbolType == SymbolType.FuturesStock )
+         {
+            expiryPart = $"{FNOPeriodType}_{ ( FNOPeriodType == FNOPeriodType.Monthly ? FNOMonth : FNOWeek )}";
+         }
+         else if ( SymbolType == SymbolType.OptionsIndex || SymbolType == SymbolType.OptionsStock )
+         {
+            expiryPart = $"{FNOPeriodType}_{ ( FNOPeriodType == FNOPeriodType.Monthly ? FNOMonth : FNOWeek )}";
+         }
+
+         var builder = new StringBuilder();
+
+         if ( !string.IsNullOrWhiteSpace( typePart ) )
+            builder.Append( $"{typePart}_" );
+
+         if ( !string.IsNullOrWhiteSpace( namePart ) )
+            builder.Append( $"{namePart}" );
+
+         if ( !string.IsNullOrWhiteSpace( expiryPart ) )
+            builder.Append( $"_{expiryPart}" );
+
+         if ( !string.IsNullOrWhiteSpace( optionTypePart ) )
+            builder.Append( $"_{optionTypePart}" );
+
+         if ( !string.IsNullOrWhiteSpace( optionValue ) )
+            builder.Append( $"_{optionValue}" );
+
+         return builder.ToString().GetHashCode();
+      }
+
+      public override bool Equals( object obj )
+      {
+         var other = (Symbol) obj;
+         return CompareTo( other ) == 0;
+      }
+
+      public bool Equals( Symbol other )
+      {
+         return Equals( (object) other );
       }
    }
 }

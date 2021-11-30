@@ -85,5 +85,11 @@ namespace Algorum.Quant.Types
          get;
          set;
       }
+
+      public DateTime ValidTillTime
+      {
+         get;
+         set;
+      }
    }
 }

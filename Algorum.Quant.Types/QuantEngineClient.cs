@@ -44,10 +44,17 @@ namespace Algorum.Quant.Types
          protected set;
       }
 
-      public QuantEngineClient( string url, string apiKey, StrategyLaunchMode launchMode, string sid )
+      public string UserId
+      {
+         get;
+         protected set;
+      }
+
+      public QuantEngineClient( string url, string apiKey, StrategyLaunchMode launchMode, string sid, string userId )
       {
          LaunchMode = launchMode;
          StrategyId = sid;
+         UserId = userId;
 
          AddMessageHandler( "tick", TickHandlerAsync );
          AddMessageHandler( "order_update", OrderUpdateHandlerAsync );
@@ -113,7 +120,7 @@ namespace Algorum.Quant.Types
 
       private void Initialize( string url )
       {
-         ConnectAsync( url ).Wait();
+         ConnectAsync( url, UserId, null ).Wait();
       }
 
       public async Task LogAsync( LogLevel logLevel, string message )

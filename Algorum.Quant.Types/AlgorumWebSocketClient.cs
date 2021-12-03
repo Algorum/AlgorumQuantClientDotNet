@@ -19,14 +19,16 @@ namespace Algorum.Quant.Types
 
       protected WebSocket _webSocket;
       protected HttpContext _context;
+      protected string _userId;
 
       protected ConcurrentDictionary<string, AutoResetEvent> _callMap = new ConcurrentDictionary<string, AutoResetEvent>();
       protected ConcurrentDictionary<string, AlgorumWebSocketMessage> _msgMap = new ConcurrentDictionary<string, AlgorumWebSocketMessage>();
       private Dictionary<string, MessageHandlerAsync> _messageHandlerMap = new Dictionary<string, MessageHandlerAsync>();
-      public AlgorumWebSocketClient( HttpContext httpContext, WebSocket webSocket )
+      public AlgorumWebSocketClient( HttpContext httpContext, WebSocket webSocket, string userId )
       {
          _context = httpContext;
          _webSocket = webSocket;
+         _userId = userId;
       }
 
       public AlgorumWebSocketClient()
@@ -52,12 +54,14 @@ namespace Algorum.Quant.Types
             await handler( message );
       }
 
-      public async Task ConnectAsync( string uri, string securityToken = null )
+      public async Task ConnectAsync( string uri, string userId, string securityToken )
       {
          ClientWebSocket webSocket = new ClientWebSocket();
 
          if ( !string.IsNullOrWhiteSpace( securityToken ) )
             webSocket.Options.SetRequestHeader( "Authorization", $"Bearer {securityToken}" );
+
+         webSocket.Options.SetRequestHeader( "x-algorum-userid", userId );
 
          await webSocket.ConnectAsync( new Uri( uri ), CancellationToken.None );
 
@@ -87,9 +91,9 @@ namespace Algorum.Quant.Types
 
             await _webSocket.CloseAsync( response.CloseStatus.Value, response.CloseStatusDescription, CancellationToken.None );
          }
-         catch ( WebSocketException )
+         catch ( WebSocketException wsx )
          {
-            //Console.WriteLine( wsx.ToString() );
+            Console.WriteLine( wsx.ToString() );
          }
          finally
          {

@@ -11,10 +11,10 @@
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageTags>Algo Trading</PackageTags>
-    <PackageReleaseNotes>Now the QuantEngineClient, the base class of user algo strategies takes in the user unique id as a mandatory parameter.</PackageReleaseNotes>
-    <AssemblyVersion>1.0.22.0</AssemblyVersion>
-    <FileVersion>1.0.22.0</FileVersion>
-    <Version>1.0.22</Version>
+    <PackageReleaseNotes>Move websocket proxy out of this library into quant engine types package.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.23.0</AssemblyVersion>
+    <FileVersion>1.0.23.0</FileVersion>
+    <Version>1.0.23</Version>
     <PackageIcon>AlgorumIcon.png</PackageIcon>
     <PackageIconUrl />
   </PropertyGroup>

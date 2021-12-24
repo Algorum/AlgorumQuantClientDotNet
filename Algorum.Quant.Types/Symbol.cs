@@ -226,7 +226,7 @@ namespace Algorum.Quant.Types
          else
             optionTypePart = OptionType == OptionType.None ? string.Empty : OptionType.ToString();
 
-         string optionValue = OptionValue == 0 ? string.Empty : OptionValue.ToString( "N:0" );
+         string optionValue = OptionValue == 0 ? string.Empty : ( (int) OptionValue ).ToString();
 
          if ( SymbolType == SymbolType.FuturesIndex || SymbolType == SymbolType.FuturesStock )
          {

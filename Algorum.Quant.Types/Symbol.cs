@@ -189,7 +189,9 @@ namespace Algorum.Quant.Types
                   SymbolType == other.SymbolType &&
                   FNOMonth == other.FNOMonth &&
                   FNOWeek == other.FNOWeek &&
-                  FNOPeriodType == other.FNOPeriodType )
+                  FNOPeriodType == other.FNOPeriodType &&
+                  OptionType == other.OptionType &&
+                  OptionValue == other.OptionValue )
             return 0;
 
          return -1;

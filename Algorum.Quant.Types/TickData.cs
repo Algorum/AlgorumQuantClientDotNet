@@ -57,6 +57,12 @@ namespace Algorum.Quant.Types
          set;
       }
 
+      public bool DayLastTick
+      {
+         get;
+         set;
+      }
+
       public Symbol Symbol
       {
          get;

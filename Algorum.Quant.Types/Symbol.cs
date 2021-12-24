@@ -165,6 +165,18 @@ namespace Algorum.Quant.Types
          set;
       }
 
+      public OptionDistanceType OptionDistanceType
+      {
+         get;
+         set;
+      }
+
+      public double OptionDistanceValue
+      {
+         get;
+         set;
+      }
+
       public double OptionValue
       {
          get;

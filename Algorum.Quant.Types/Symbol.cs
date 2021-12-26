@@ -113,6 +113,53 @@ namespace Algorum.Quant.Types
 
          return builder.ToString();
       }
+
+      public static string GetInstrumentIdentifier( this Symbol source )
+      {
+         string typePart = string.Empty;
+
+         switch ( source.SymbolType )
+         {
+         case SymbolType.FuturesIndex:
+            typePart = "FUTIDX";
+            break;
+         case SymbolType.FuturesStock:
+            typePart = "FUTSTK";
+            break;
+         case SymbolType.OptionsIndex:
+            typePart = "OPTIDX";
+            break;
+         case SymbolType.OptionsStock:
+            typePart = "OPTSTK";
+            break;
+         }
+
+         string namePart = source.Ticker;
+         string optionTypePart;
+
+         if ( source.SymbolType == SymbolType.FuturesIndex || source.SymbolType == SymbolType.FuturesStock )
+            optionTypePart = OptionType.XX.ToString();
+         else
+            optionTypePart = source.OptionType == OptionType.None ? string.Empty : source.OptionType.ToString();
+
+         string optionValue = source.OptionValue == 0 ? string.Empty : source.OptionValue.ToString( "N:0" );
+
+         var builder = new StringBuilder();
+
+         if ( !string.IsNullOrWhiteSpace( typePart ) )
+            builder.Append( $"{typePart}_" );
+
+         if ( !string.IsNullOrWhiteSpace( namePart ) )
+            builder.Append( $"{namePart}" );
+
+         if ( !string.IsNullOrWhiteSpace( optionTypePart ) )
+            builder.Append( $"_{optionTypePart}" );
+
+         if ( !string.IsNullOrWhiteSpace( optionValue ) )
+            builder.Append( $"_{optionValue}" );
+
+         return builder.ToString();
+      }
    }
 
    public class Symbol : IComparable<Symbol>, IEquatable<Symbol>

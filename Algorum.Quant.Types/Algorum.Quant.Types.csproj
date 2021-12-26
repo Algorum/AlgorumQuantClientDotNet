@@ -11,10 +11,10 @@
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageTags>Algo Trading</PackageTags>
-    <PackageReleaseNotes>Updated Symbol object instrument identifier string representation.</PackageReleaseNotes>
-    <AssemblyVersion>1.0.28.0</AssemblyVersion>
-    <FileVersion>1.0.28.0</FileVersion>
-    <Version>1.0.28</Version>
+    <PackageReleaseNotes>Added GetInstrumentIdentifier method to Symbol type to retrieve the string representation of the Symbol without expiry part.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.29.0</AssemblyVersion>
+    <FileVersion>1.0.29.0</FileVersion>
+    <Version>1.0.29</Version>
     <PackageIcon>AlgorumIcon.png</PackageIcon>
     <PackageIconUrl />
   </PropertyGroup>

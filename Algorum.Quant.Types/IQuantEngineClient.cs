@@ -22,6 +22,7 @@ namespace Algorum.Quant.Types
       Task<string> BacktestAsync( BacktestRequest backtestRequest );
       Task StartTradingAsync( TradingRequest tradingRequest );
       Task StopTradingAsync();
+      Task<List<DateTime>> GetHolidays( TradeExchange exchange );
       void Wait();
    }
 }

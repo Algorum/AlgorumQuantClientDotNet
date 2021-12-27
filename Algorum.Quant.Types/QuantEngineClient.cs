@@ -179,6 +179,11 @@ namespace Algorum.Quant.Types
          }
       }
 
+      public async Task<List<DateTime>> GetHolidays( TradeExchange exchange )
+      {
+         return await ExecuteAsync<TradeExchange, List<DateTime>>( "get_holidays", exchange );
+      }
+
       public async Task SubscribeSymbolsAsync( List<Symbol> symbols )
       {
          await ExecuteAsync( "sub_symbols", symbols );

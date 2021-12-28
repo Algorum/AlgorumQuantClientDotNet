@@ -11,10 +11,10 @@
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageTags>Algo Trading</PackageTags>
-    <PackageReleaseNotes>Added "GetHolidays" method to the QuantEngineClient, which returns the list of holidays based on given exchange.</PackageReleaseNotes>
-    <AssemblyVersion>1.0.30.0</AssemblyVersion>
-    <FileVersion>1.0.30.0</FileVersion>
-    <Version>1.0.30</Version>
+    <PackageReleaseNotes>Added "OpenInterest" to the TickData type.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.31.0</AssemblyVersion>
+    <FileVersion>1.0.31.0</FileVersion>
+    <Version>1.0.31</Version>
     <PackageIcon>AlgorumIcon.png</PackageIcon>
     <PackageIconUrl />
   </PropertyGroup>

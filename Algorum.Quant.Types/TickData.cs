@@ -68,5 +68,11 @@ namespace Algorum.Quant.Types
          get;
          set;
       }
+
+      public double OpenInterest
+      {
+         get;
+         set;
+      }
    }
 }

@@ -10,10 +10,7 @@ namespace Algorum.Quant.Types
    {
       public static bool IsMatch( this Symbol source, TickData tickData )
       {
-         var sourceId = source.GetInstrumentIdentifier( tickData.Timestamp );
-         var tickId = tickData.Symbol.GetInstrumentIdentifier( tickData.Timestamp );
-
-         return string.Compare( sourceId, tickId, true ) == 0;
+         return source.Equals( tickData.Symbol );
       }
 
       public static string GetInstrumentIdentifier( this Symbol source, DateTime timestamp )
@@ -136,6 +133,7 @@ namespace Algorum.Quant.Types
 
          string namePart = source.Ticker;
          string optionTypePart;
+         string expiryPart = string.Empty;
 
          if ( source.SymbolType == SymbolType.FuturesIndex || source.SymbolType == SymbolType.FuturesStock )
             optionTypePart = OptionType.XX.ToString();
@@ -144,6 +142,12 @@ namespace Algorum.Quant.Types
 
          string optionValue = source.OptionValue == 0 ? string.Empty : source.OptionValue.ToString( "N:0" );
 
+         if ( source.SymbolType == SymbolType.FuturesIndex || source.SymbolType == SymbolType.FuturesStock ||
+               source.SymbolType == SymbolType.OptionsIndex || source.SymbolType == SymbolType.OptionsStock )
+         {
+            expiryPart = $"{source.ExpiryDate.ToString( "ddMMMyy" )}";
+         }
+
          var builder = new StringBuilder();
 
          if ( !string.IsNullOrWhiteSpace( typePart ) )
@@ -151,6 +155,9 @@ namespace Algorum.Quant.Types
 
          if ( !string.IsNullOrWhiteSpace( namePart ) )
             builder.Append( $"{namePart}" );
+
+         if ( !string.IsNullOrWhiteSpace( expiryPart ) )
+            builder.Append( $"_{expiryPart}" );
 
          if ( !string.IsNullOrWhiteSpace( optionTypePart ) )
             builder.Append( $"_{optionTypePart}" );
@@ -230,6 +237,12 @@ namespace Algorum.Quant.Types
          set;
       }
 
+      public DateTime ExpiryDate
+      {
+         get;
+         set;
+      }
+
       public int CompareTo( Symbol other )
       {
          if ( string.Compare( Ticker, other.Ticker, true ) == 0 &&
@@ -238,7 +251,8 @@ namespace Algorum.Quant.Types
                   FNOWeek == other.FNOWeek &&
                   FNOPeriodType == other.FNOPeriodType &&
                   OptionType == other.OptionType &&
-                  OptionValue == other.OptionValue )
+                  OptionValue == other.OptionValue &&
+                  ExpiryDate == other.ExpiryDate )
             return 0;
 
          return -1;
@@ -275,13 +289,10 @@ namespace Algorum.Quant.Types
 
          string optionValue = OptionValue == 0 ? string.Empty : ( (int) OptionValue ).ToString();
 
-         if ( SymbolType == SymbolType.FuturesIndex || SymbolType == SymbolType.FuturesStock )
+         if ( SymbolType == SymbolType.FuturesIndex || SymbolType == SymbolType.FuturesStock ||
+            SymbolType == SymbolType.OptionsIndex || SymbolType == SymbolType.OptionsStock )
          {
-            expiryPart = $"{FNOPeriodType}_{ ( FNOPeriodType == FNOPeriodType.Monthly ? FNOMonth : FNOWeek )}";
-         }
-         else if ( SymbolType == SymbolType.OptionsIndex || SymbolType == SymbolType.OptionsStock )
-         {
-            expiryPart = $"{FNOPeriodType}_{ ( FNOPeriodType == FNOPeriodType.Monthly ? FNOMonth : FNOWeek )}";
+            expiryPart = $"{ExpiryDate.ToString( "ddMMMyy" )}";
          }
 
          var builder = new StringBuilder();

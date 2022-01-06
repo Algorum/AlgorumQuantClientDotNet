@@ -74,7 +74,7 @@ namespace Algorum.Quant.Types
          set;
       }
 
-      public Dictionary<Symbol, Dictionary<string, object>> SymbolStatsMap
+      public List<KeyValuePair<Symbol, Dictionary<string, object>>> SymbolStats
       {
          get;
          set;

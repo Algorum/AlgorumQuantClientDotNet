@@ -11,10 +11,10 @@
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageTags>Algo Trading</PackageTags>
-    <PackageReleaseNotes>Update StrategyRunSummary.SymbolStatsMap property with Symbol type instead of Symbol Identifier (String type).</PackageReleaseNotes>
-    <AssemblyVersion>1.0.34.0</AssemblyVersion>
-    <FileVersion>1.0.34.0</FileVersion>
-    <Version>1.0.34</Version>
+    <PackageReleaseNotes>Update StrategyRunSummary.SymbolStatsMap (Dictionary) property StrategyRunSummary.SymbolStats (List)</PackageReleaseNotes>
+    <AssemblyVersion>1.0.35.0</AssemblyVersion>
+    <FileVersion>1.0.35.0</FileVersion>
+    <Version>1.0.35</Version>
     <PackageIcon>AlgorumIcon.png</PackageIcon>
     <PackageIconUrl />
   </PropertyGroup>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Algorum.Quant.Types
 {
@@ -324,6 +325,11 @@ namespace Algorum.Quant.Types
       public bool Equals( Symbol other )
       {
          return Equals( (object) other );
+      }
+
+      public override string ToString()
+      {
+         return this.GetInstrumentIdentifier();
       }
    }
 }

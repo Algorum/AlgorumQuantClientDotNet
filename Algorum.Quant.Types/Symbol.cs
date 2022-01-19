@@ -39,11 +39,11 @@ namespace Algorum.Quant.Types
          string optionTypePart;
 
          if ( source.SymbolType == SymbolType.FuturesIndex || source.SymbolType == SymbolType.FuturesStock )
-            optionTypePart = OptionType.XX.ToString();
+            optionTypePart = $"{OptionType.XX}_0";
          else
             optionTypePart = source.OptionType == OptionType.None ? string.Empty : source.OptionType.ToString();
 
-         string optionValue = source.OptionValue == 0 ? string.Empty : source.OptionValue.ToString( "N:0" );
+         string optionValue = source.OptionValue == 0 ? string.Empty : $"{(int) source.OptionValue}";
 
          if ( source.SymbolType == SymbolType.FuturesIndex || source.SymbolType == SymbolType.FuturesStock )
          {
@@ -60,7 +60,7 @@ namespace Algorum.Quant.Types
                expiryDate = curMonthLastDate;
             }
 
-            expiryPart = expiryDate.ToString( "ddMMyyyy" );
+            expiryPart = expiryDate.ToString( "ddMMyyyy" ).ToUpper();
          }
          else if ( source.SymbolType == SymbolType.OptionsIndex || source.SymbolType == SymbolType.OptionsStock )
          {
@@ -79,7 +79,7 @@ namespace Algorum.Quant.Types
                   expiryDate = curMonthLastDate;
                }
 
-               expiryPart = expiryDate.ToString( "ddMMyyyy" );
+               expiryPart = expiryDate.ToString( "ddMMyyyy" ).ToUpper();
             }
             else
             {
@@ -88,7 +88,7 @@ namespace Algorum.Quant.Types
                if ( expiryDate.Day > timestamp.Day )
                   expiryDate = timestamp.GetSpecificDayOfTheWeek( DayOfWeek.Thursday, source.FNOWeek + 1 );
 
-               expiryPart = expiryDate.ToString( "ddMMyyyy" );
+               expiryPart = expiryDate.ToString( "ddMMyyyy" ).ToUpper();
             }
          }
 
@@ -137,16 +137,16 @@ namespace Algorum.Quant.Types
          string expiryPart = string.Empty;
 
          if ( source.SymbolType == SymbolType.FuturesIndex || source.SymbolType == SymbolType.FuturesStock )
-            optionTypePart = OptionType.XX.ToString();
+            optionTypePart = $"{OptionType.XX}_0";
          else
             optionTypePart = source.OptionType == OptionType.None ? string.Empty : source.OptionType.ToString();
 
-         string optionValue = source.OptionValue == 0 ? string.Empty : source.OptionValue.ToString( "N:0" );
+         string optionValue = source.OptionValue == 0 ? string.Empty : $"{(int) source.OptionValue}";
 
          if ( source.SymbolType == SymbolType.FuturesIndex || source.SymbolType == SymbolType.FuturesStock ||
                source.SymbolType == SymbolType.OptionsIndex || source.SymbolType == SymbolType.OptionsStock )
          {
-            expiryPart = $"{source.ExpiryDate.ToString( "ddMMMyy" )}";
+            expiryPart = $"{source.ExpiryDate.ToString( "ddMMMyyyy" ).ToUpper()}";
          }
 
          var builder = new StringBuilder();

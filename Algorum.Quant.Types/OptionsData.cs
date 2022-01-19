@@ -6,34 +6,27 @@ using System.Threading.Tasks;
 
 namespace Algorum.Quant.Types
 {
-   public class TickData
+   public class OptionsData
    {
-      public string Id
+      public Symbol Symbol
       {
          get;
          set;
       }
 
-      public DateTime Date
+      public DateTime LastTradeTime
       {
          get;
          set;
       }
 
-
-      public DateTime Timestamp
+      public DateTime ServerTime
       {
          get;
          set;
       }
 
       public double LTP
-      {
-         get;
-         set;
-      }
-
-      public double LTQ
       {
          get;
          set;
@@ -51,31 +44,13 @@ namespace Algorum.Quant.Types
          set;
       }
 
-      public bool LastTick
-      {
-         get;
-         set;
-      }
-
-      public bool DayLastTick
-      {
-         get;
-         set;
-      }
-
-      public Symbol Symbol
-      {
-         get;
-         set;
-      }
-
       public double OpenInterest
       {
          get;
          set;
       }
 
-      public OptionsGreeks OptionsGreeks
+      public double OpenInterestChange
       {
          get;
          set;

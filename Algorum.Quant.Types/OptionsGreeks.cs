@@ -6,81 +6,105 @@ using System.Threading.Tasks;
 
 namespace Algorum.Quant.Types
 {
-   public class StrategyRunSummary
+   public class OptionsGreeks
    {
-      public string StrategyId
+      public Symbol Symbol
       {
          get;
          set;
       }
 
-      public string RunId
+      public double Delta
       {
          get;
          set;
       }
 
-      public StrategyLaunchMode LaunchMode
+      public double Theta
       {
          get;
          set;
       }
 
-      public BrokeragePlatform BrokeragePlatform
+      public double Gamma
       {
          get;
          set;
       }
 
-      public DateTime StartTime
+      public double Vega
       {
          get;
          set;
       }
 
-      public DateTime EndTime
+      public double IV
       {
          get;
          set;
       }
 
-      public DateTime BacktestStartDate
+      public double IVVWap
       {
          get;
          set;
       }
 
-      public DateTime BacktestEndDate
+      public double Vanna
       {
          get;
          set;
       }
 
-      public double PL
+      public double Charm
       {
          get;
          set;
       }
 
-      public double MaxDrawdown
+      public double Speed
       {
          get;
          set;
       }
 
-      public double Capital
+      public double Zomma
       {
          get;
          set;
       }
 
-      public List<Order> Orders
+      public double Color
       {
          get;
          set;
       }
 
-      public List<KeyValuePair<Symbol, Dictionary<string, object>>> SymbolStats
+      public double Volga
+      {
+         get;
+         set;
+      }
+
+      public double Veta
+      {
+         get;
+         set;
+      }
+
+      public double ThetaGammaRatio
+      {
+         get;
+         set;
+      }
+
+      public double ThetaVegaRatio
+      {
+         get;
+         set;
+      }
+
+      public double DTR
       {
          get;
          set;

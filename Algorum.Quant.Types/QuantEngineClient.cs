@@ -155,6 +155,11 @@ namespace Algorum.Quant.Types
          return default( T );
       }
 
+      public async Task<List<OptionsData>> GetOptionsChainAsync( string ticker )
+      {
+         return await ExecuteAsync<string, List<OptionsData>>( "get_options_chain", ticker );
+      }
+
       public async Task<string> PlaceOrderAsync( PlaceOrderRequest placeOrderRequest )
       {
          return await ExecuteAsync<PlaceOrderRequest, string>( "place_order", placeOrderRequest );
@@ -179,7 +184,7 @@ namespace Algorum.Quant.Types
          }
       }
 
-      public async Task<List<DateTime>> GetHolidays( TradeExchange exchange )
+      public async Task<List<DateTime>> GetHolidaysAsync( TradeExchange exchange )
       {
          return await ExecuteAsync<TradeExchange, List<DateTime>>( "get_holidays", exchange );
       }
@@ -220,6 +225,16 @@ namespace Algorum.Quant.Types
          return await ExecuteAsync<BacktestRequest, string>( "backtest", backtestRequest );
       }
 
+      public async Task<StrategyRunSummary> GetStrategyRunSummaryAsync( double capital, List<KeyValuePair<Symbol, TickData>> symbolLastTicks )
+      {
+         return await ExecuteAsync<StrategyRunSummaryRequest, StrategyRunSummary>( "get_strategy_run_summary",
+            new StrategyRunSummaryRequest()
+            {
+               Capital = capital,
+               SymbolLastTicks = symbolLastTicks
+            } );
+      }
+
       public virtual async Task StartTradingAsync( TradingRequest tradingRequest )
       {
          await ExecuteAsync( "start_trading", tradingRequest );
@@ -230,9 +245,9 @@ namespace Algorum.Quant.Types
          await ExecuteAsync<string>( "stop_trading" );
       }
 
-      public virtual Dictionary<string, object> GetStats( TickData tickData )
+      public async virtual Task<Dictionary<string, object>> GetStatsAsync( TickData tickData )
       {
-         return null;
+         return new Dictionary<string, object>();
       }
 
       public virtual async Task SendProgressAsync( TickData tickData )
@@ -256,7 +271,7 @@ namespace Algorum.Quant.Types
 
                await SendAsync( "publish_progress", _progressPercent );
 
-               var stats = GetStats( tickData );
+               var stats = await GetStatsAsync( tickData );
                await SendAsync( "publish_stats", stats );
 
                Console.WriteLine( $"Progress: {_progressPercent:N2}" );
@@ -275,7 +290,7 @@ namespace Algorum.Quant.Types
          }
          else
          {
-            var stats = GetStats( tickData );
+            var stats = await GetStatsAsync( tickData );
             await SendAsync( "publish_stats", stats );
          }
       }

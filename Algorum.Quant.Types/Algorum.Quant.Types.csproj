@@ -11,10 +11,10 @@
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageTags>Algo Trading</PackageTags>
-    <PackageReleaseNotes>Added OptionsData type to hold the Options symbol detail during option chain fetch.</PackageReleaseNotes>
-    <AssemblyVersion>1.0.39.0</AssemblyVersion>
-    <FileVersion>1.0.39.0</FileVersion>
-    <Version>1.0.39</Version>
+    <PackageReleaseNotes>Made GetStrategySummary, GetHolidays and GetStats methods as async methods.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.43.0</AssemblyVersion>
+    <FileVersion>1.0.43.0</FileVersion>
+    <Version>1.0.43</Version>
     <PackageIcon>AlgorumIcon.png</PackageIcon>
     <PackageIconUrl />
   </PropertyGroup>

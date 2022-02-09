@@ -11,7 +11,7 @@
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageTags>Algo Trading</PackageTags>
-    <PackageReleaseNotes>Made GetStrategySummary, GetHolidays and GetStats methods as async methods.</PackageReleaseNotes>
+    <PackageReleaseNotes>Made GetStrategyRunSummary, GetHolidays and GetStats methods as async methods.</PackageReleaseNotes>
     <AssemblyVersion>1.0.43.0</AssemblyVersion>
     <FileVersion>1.0.43.0</FileVersion>
     <Version>1.0.43</Version>

@@ -19,5 +19,17 @@ namespace Algorum.Quant.Types
          get;
          set;
       }
+
+      public StatsType StatsType
+      {
+         get;
+         set;
+      }
+
+      public int OrderCount
+      {
+         get;
+         set;
+      }
    }
 }

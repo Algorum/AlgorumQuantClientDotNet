@@ -24,6 +24,8 @@ namespace Algorum.Quant.Types
       Task StopTradingAsync();
       Task<List<DateTime>> GetHolidaysAsync( TradeExchange exchange );
       void Wait();
-      Task<StrategyRunSummary> GetStrategyRunSummaryAsync( double capital, List<KeyValuePair<Symbol, TickData>> symbolLastTicks );
+      Task<StrategyRunSummary> GetStrategyRunSummaryAsync( double capital, List<KeyValuePair<Symbol, TickData>> symbolLastTicks, StatsType statsType, int orderCount );
+      Task<DateTime> GetNextWeeklyClosureDayAsync( DateTime date, DayOfWeek dayofweek, List<DateTime> excludeDays );
+      Task<DateTime> GetNextMonthlyClosureDayAsync( DateTime date, DayOfWeek dayofweek, List<DateTime> excludeDays );
    }
 }

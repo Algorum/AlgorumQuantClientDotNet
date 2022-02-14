@@ -11,10 +11,10 @@
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageTags>Algo Trading</PackageTags>
-    <PackageReleaseNotes>Made GetStrategyRunSummary, GetHolidays and GetStats methods as async methods.</PackageReleaseNotes>
-    <AssemblyVersion>1.0.43.0</AssemblyVersion>
-    <FileVersion>1.0.43.0</FileVersion>
-    <Version>1.0.43</Version>
+    <PackageReleaseNotes>Added support for expiry based paired options stats for a strategy, where the stats are based on the total order count of a particular option expiry. This eliminates the wrong calculation of draw down for options strategies that have paired orders.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.45.0</AssemblyVersion>
+    <FileVersion>1.0.45.0</FileVersion>
+    <Version>1.0.45</Version>
     <PackageIcon>AlgorumIcon.png</PackageIcon>
     <PackageIconUrl />
   </PropertyGroup>

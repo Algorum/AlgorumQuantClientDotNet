@@ -225,13 +225,16 @@ namespace Algorum.Quant.Types
          return await ExecuteAsync<BacktestRequest, string>( "backtest", backtestRequest );
       }
 
-      public async Task<StrategyRunSummary> GetStrategyRunSummaryAsync( double capital, List<KeyValuePair<Symbol, TickData>> symbolLastTicks )
+      public async Task<StrategyRunSummary> GetStrategyRunSummaryAsync( double capital, List<KeyValuePair<Symbol, TickData>> symbolLastTicks,
+         StatsType statsType, int orderCount )
       {
          return await ExecuteAsync<StrategyRunSummaryRequest, StrategyRunSummary>( "get_strategy_run_summary",
             new StrategyRunSummaryRequest()
             {
                Capital = capital,
-               SymbolLastTicks = symbolLastTicks
+               SymbolLastTicks = symbolLastTicks,
+               StatsType = statsType,
+               OrderCount = orderCount
             } );
       }
 
@@ -322,6 +325,46 @@ namespace Algorum.Quant.Types
       {
          // Wait until we are stopped
          _stopEvent.WaitOne();
+      }
+
+      public async Task<DateTime> GetNextWeeklyClosureDayAsync( DateTime date, DayOfWeek dayofweek, List<DateTime> excludeDays )
+      {
+         var checkDate = new DateTime( date.Year, date.Month, date.Day );
+         int daysDiff = dayofweek - checkDate.DayOfWeek;
+
+         if ( daysDiff < 0 )
+            daysDiff = (int) checkDate.DayOfWeek - daysDiff;
+
+         var dt = checkDate.AddDays( daysDiff );
+
+         while ( true )
+         {
+            var contains = excludeDays.Contains( dt );
+
+            if ( contains || dt.DayOfWeek == DayOfWeek.Saturday || dt.DayOfWeek == DayOfWeek.Sunday )
+               dt = dt.AddDays( -1 );
+            else
+               break;
+         }
+
+         return dt;
+      }
+
+      public async Task<DateTime> GetNextMonthlyClosureDayAsync( DateTime date, DayOfWeek dayofweek, List<DateTime> excludeDays )
+      {
+         var dt = date.GetLastSpecificDayOfTheMonth( dayofweek );
+
+         while ( true )
+         {
+            var contains = excludeDays.Contains( dt );
+
+            if ( contains || dt.DayOfWeek == DayOfWeek.Saturday || dt.DayOfWeek == DayOfWeek.Sunday )
+               dt = dt.AddDays( -1 );
+            else
+               break;
+         }
+
+         return dt;
       }
    }
 }
